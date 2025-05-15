@@ -1,6 +1,4 @@
-<p align="center">
-  <img alt="CometChat" src="https://assets.cometchat.io/website/images/logos/banner.png">
-</p>
+
 
 # CometChat Internship Assignment – React UI Kit Integration
 
@@ -23,9 +21,10 @@ This is a fully functional React-based chat application built using CometChat’
 
 ##  Screenshots
 
-<p align="center">
-  <img alt="CometChat" src="https://assets.cometchat.io/website/images/logos/banner.png">
-</p>
+(./screenshots/1.png)
+(./screenshots/2.png)
+(./screenshots/3.png)
+(./screenshots/4.png)
   
 ## 🛠️ How to Run Locally
 
