@@ -21,10 +21,10 @@ This is a fully functional React-based chat application built using CometChat’
 
 ##  Screenshots
 
-<img src="./screenshot/1.png" alt="Screenshot" width="600" />
-<img src="./screenshot/2.png" alt="Screenshot" width="600" />
-<img src="./screenshot/3.png" alt="Screenshot" width="600" />
-<img src="./screenshot/4.png" alt="Screenshot" width="600" />
+<img src="./screenshots/1.png" alt="Screenshot" width="600" />
+<img src="./screenshots/2.png" alt="Screenshot" width="600" />
+<img src="./screenshots/3.png" alt="Screenshot" width="600" />
+<img src="./screenshots/4.png" alt="Screenshot" width="600" />
   
 ## 🛠️ How to Run Locally
 
