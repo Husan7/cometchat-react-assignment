@@ -2,240 +2,76 @@
   <img alt="CometChat" src="https://assets.cometchat.io/website/images/logos/banner.png">
 </p>
 
-# Integration steps for Visual Builder
+# CometChat Internship Assignment – React UI Kit Integration
 
-Follow these steps to integrate it into your existing React project:
+This is a fully functional React-based chat application built using CometChat’s UI Kit (Visual Builder). It allows users to log in and chat in real time with other users created in the CometChat dashboard.
 
-For Next JS integration, please refer to our <a href="https://www.cometchat.com/docs/ui-kit/react/builder-integration-nextjs" target="_blank">step-by-step guide</a>.
+##  Tech Stack
 
-## 1. Install dependencies in your app
+- React
+- CometChat Pro SDK (UI Kit)
+- JavaScript (ES6+)
+- HTML/CSS
 
-Run the following command to install the required dependencies:
+##  Features
 
-```bash
-npm install @cometchat/chat-uikit-react@6.0.4 @cometchat/calls-sdk-javascript @cometchat/chat-sdk-javascript
-```
+- Login screen with UID authentication
+- Real-time one-on-one messaging
+- UI powered by CometChat React UI Kit
+- Responsive and styled out of the box
+- CometChat cloud handles all backend logic
 
-## 2. Copy CometChat Folder
+##  Screenshots
 
-Copy the `cometchat-visual-builder-react/src/CometChat` folder into your project’s `src` directory.
+<p align="center">
+  <img alt="CometChat" src="https://assets.cometchat.io/website/images/logos/banner.png">
+</p>
+  
+## 🛠️ How to Run Locally
 
-## 3. Initialize CometChat UI Kit
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/cometchat-assignment.git
+   cd cometchat-assignment
+   ```
 
-The initialization process varies depending on your setup. Select your framework:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-<details>
-  <summary>CRA</summary>
+3. Start the development server:
+   ```bash
+   npm start
+   ```
 
-Open the file `src/index.tsx` and update it to include the required imports and initialization logic.
+4. Login with any UID created in your CometChat dashboard (e.g., `user1`, `user2`)
 
-```typescript
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import {
-  UIKitSettingsBuilder,
-  CometChatUIKit,
-} from "@cometchat/chat-uikit-react";
-import { setupLocalization } from "./CometChat/utils/utils";
-import { BuilderSettingsProvider } from "./CometChat/context/BuilderSettingsContext";
+## 🔑 CometChat Credentials
 
+Stored in `src/constants.js`:
+```javascript
 export const COMETCHAT_CONSTANTS = {
-  APP_ID: "", // Replace with your App ID
-  REGION: "", // Replace with your App Region
-  AUTH_KEY: "", // Replace with your Auth Key or leave blank if you are authenticating using Auth Token
+  APP_ID: "275545190c4ca01f",
+  REGION: "in",
+  AUTH_KEY: "32a765aeecc246b7f76aea6ff7c985eaf92d4b4e",
 };
-
-const uiKitSettings = new UIKitSettingsBuilder()
-  .setAppId(COMETCHAT_CONSTANTS.APP_ID)
-  .setRegion(COMETCHAT_CONSTANTS.REGION)
-  .setAuthKey(COMETCHAT_CONSTANTS.AUTH_KEY)
-  .subscribePresenceForAllUsers()
-  .build();
-
-CometChatUIKit.init(uiKitSettings)?.then(() => {
-  setupLocalization();
-  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-    <BuilderSettingsProvider>
-      <App />
-    </BuilderSettingsProvider>
-  );
-});
 ```
 
-</details>
+## ❗ Challenges Faced
 
-<details>
-  <summary>Vite</summary>
+- **No default users provided** — Had to manually create test UIDs like `user1`, `user2`
+- **Limited Visual Builder docs** — Required back-and-forth with official UI Kit documentation
+- **Confusion with Auth Keys** — Accidentally used the REST key initially instead of Auth key
 
-Open the file `src/main.tsx` and update it to include the required imports and initialization logic.
+## ✅ How I Solved Them
 
-```typescript
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
-import {
-  UIKitSettingsBuilder,
-  CometChatUIKit,
-} from "@cometchat/chat-uikit-react";
-import { setupLocalization } from "./CometChat/utils/utils.ts";
-import { BuilderSettingsProvider } from "./CometChat/context/BuilderSettingsContext.tsx";
+- Created test users in the CometChat dashboard
+- Used CometChat’s official UI Kit setup tutorial
+- Debugged login failures by printing `CometChat.login` errors in console
 
-export const COMETCHAT_CONSTANTS = {
-  APP_ID: "", // Replace with your App ID
-  REGION: "", // Replace with your App Region
-  AUTH_KEY: "", // Replace with your Auth Key or leave blank if you are authenticating using Auth Token
-};
+## 💡 Suggestions for CometChat
 
-const uiKitSettings = new UIKitSettingsBuilder()
-  .setAppId(COMETCHAT_CONSTANTS.APP_ID)
-  .setRegion(COMETCHAT_CONSTANTS.REGION)
-  .setAuthKey(COMETCHAT_CONSTANTS.AUTH_KEY)
-  .subscribePresenceForAllUsers()
-  .build();
-
-CometChatUIKit.init(uiKitSettings)?.then(() => {
-  setupLocalization();
-  createRoot(document.getElementById("root")!).render(
-    <BuilderSettingsProvider>
-      <App />
-    </BuilderSettingsProvider>
-  );
-});
-```
-
-</details>
-
-## 4. User Login
-
-Refer to the [User Login Guide](https://www.cometchat.com/docs/ui-kit/react/react-js-integration#step-4-user-login) to implement user authentication in your app.
-
-## 5. Render CometChatBuilderApp Component
-
-Add the `CometChatBuilderApp` component to your app:
-
-```typescript
-import CometChatBuilderApp from "./CometChat/CometChatBuilderApp";
-
-const App = () => {
-  return (
-    /* The CometChatBuilderApp component requires a parent element with an explicit height and width  
-   to render properly. Ensure the container has defined dimensions, and adjust them as needed  
-   based on your layout requirements. */
-    <div style={{ width: "100vw", height: "100dvh" }}>
-      <CometChatBuilderApp />
-    </div>
-  );
-};
-
-export default App;
-```
-
-### Note:
-
-Use the `CometChatBuilderApp` component to launch a chat interface with a selected user or group.
-
-```typescript
-import { useEffect, useState } from "react";
-import { CometChat } from "@cometchat/chat-sdk-javascript";
-import CometChatBuilderApp from "./CometChat/CometChatBuilderApp";
-
-const App = () => {
-  const [selectedUser, setSelectedUser] = useState<CometChat.User | undefined>(
-    undefined
-  );
-  const [selectedGroup, setSelectedGroup] = useState<
-    CometChat.Group | undefined
-  >(undefined);
-
-  useEffect(() => {
-    const UID = "UID"; // Replace with your User ID
-    CometChat.getUser(UID).then(setSelectedUser).catch(console.error);
-
-    const GUID = "GUID"; // Replace with your Group ID
-    CometChat.getGroup(GUID).then(setSelectedGroup).catch(console.error);
-  }, []);
-
-  return (
-    /* CometChatBuilderApp requires a parent with explicit height & width to render correctly.
-      Adjust the height and width as needed.
-     */
-    <div style={{ width: "100vw", height: "100vh" }}>
-      <CometChatBuilderApp user={selectedUser} group={selectedGroup} />
-    </div>
-  );
-};
-
-export default App;
-```
-
-This implementation applies when you choose the **Without Sidebar** option for Sidebar.
-
-- If `chatType` is `user` (default), only User chats will be displayed (either the selected user or the default user).
-- If `chatType` is `group`, only Group chats will be displayed (either the selected group or the default group).
-
-## 6. Run the App
-
-Finally, start your app using the appropriate command based on your setup:
-
-- Vite
-
-```bash
-npm run dev
-```
-
-- Create React App (CRA):
-
-```bash
-npm start
-```
-
-## Note:
-
-Enable the following features in the Dashboard in your App under Chat > Features to ensure full functionality.
-
-> Mentions, Reactions, Message translation, Polls, Collaborative whiteboard, Collaborative document, Emojis, Stickers, Conversation starter, Conversation summary, Smart reply.
-
----
-
-If you face any issues while integrating the builder in your app project, please check if you have the following configurations added to your `tsConfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "resolveJsonModule": true
-  }
-}
-```
-
-If your development server is running, restart it to ensure the new TypeScript configuration is picked up.
-
-## Run the Visual Builder App Independently (optional)
-
-> &nbsp;
->
-> 1. Open the `cometchat-visual-builder-react` folder.
-> 2. Add credentials for your app in `src/index.tsx` (`src/main.tsx` incase for Vite):
->
-> ```typescript
-> export const COMETCHAT_CONSTANTS = {
->   APP_ID: "", // Replace with your App ID
->   REGION: "", // Replace with your App Region
->   AUTH_KEY: "", // Replace with your Auth Key or leave blank if you are authenticating using Auth Token
-> };
-> ```
->
-> 3. Install dependencies:
->
-> ```bash
-> npm i
-> ```
->
-> 4. Run the app:
->
-> ```bash
-> npm start
-> ```
-
-For detailed steps, refer to our <a href="https://www.cometchat.com/docs/ui-kit/react/builder-integration" target="_blank">Visual Builder documentation</a>
+- Add default test users to all new apps automatically
+- Include a visual example of where to plug UI Kit files into a React app
+- Separate REST API key and Auth key more clearly in dashboard
